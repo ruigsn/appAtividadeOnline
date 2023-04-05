@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minha Aplicação - Cadastrar Cliente</title>
   <link rel="stylesheet" href="../assets/css/cadastrar_cliente.css">
+	<!-- <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script> -->
 </head>
 <body>
   <header>
@@ -20,15 +21,15 @@
 	</nav>
 	<main>
 		<h2>Cadastrar Cliente</h2>
-		<form>
+		<form id="meuFormulario" action="" method="post">
 			<label for="nome">Nome:</label>
 			<input type="text" id="nome" name="nome" required>
 
 			<label for="email">Email:</label>
 			<input type="email" id="email" name="email" required>
 
-			<label for="telefone">Telefone:</label>
-			<input type="tel" id="telefone" name="telefone" required>
+			<!-- <label for="telefone">Telefone:</label>
+			<input type="tel" id="telefone" name="telefone" required> -->
 
 			<button type="submit">Cadastrar</button>
 		</form>
@@ -37,7 +38,7 @@
 		<p>Desenvolvido por Equipe ADS</p>
 	</footer>
 
-	<script src="node_modules/parse/dist/parse.min.js"></script>
+	<script src="../node_modules/parse/dist/parse.min.js"></script>
 
 <script>
 Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -47,19 +48,26 @@ Parse.initialize(
   'HhMUQhtryM2RuNR4drEV0jfU4kBDwaVA4eDjOMZw' // This is your Javascript key
 );
 
-(async () => {
-  const myNewObject = new Parse.Object('Cliente');
-  myNewObject.set('nome', 'A string');
-  myNewObject.set('email', 'A string');
-  myNewObject.set('telefone', 1);
+const meuFormulario = document.getElementById('meuFormulario');
+
+meuFormulario.addEventListener('submit', async (event) => {
+	event.preventDefault();
+	const nomeCliente = document.getElementById('nome').value;
+	const emailCliente = document.getElementById('email').value;
+
+	const myNewObject = new Parse.Object('Cliente');
+  myNewObject.set('nome', nomeCliente);
+  myNewObject.set('email', emailCliente);
   try {
     const result = await myNewObject.save();
     // Access the Parse Object attributes using the .GET method
-    console.log('Cliente created', result);
+    console.log('Cliente criado com sucesso', result);
+		window.location.href = 'sucesso.html';		
   } catch (error) {
     console.error('Error while creating Cliente: ', error);
+		window.location.href = 'erro.html';
   }
-})();
+});
 
 </script>
 
