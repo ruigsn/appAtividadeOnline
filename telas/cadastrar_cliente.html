@@ -37,5 +37,31 @@
 		<p>Desenvolvido por Equipe ADS</p>
 	</footer>
 
+	<script src="node_modules/parse/dist/parse.min.js"></script>
+
+<script>
+Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
+// Remember to inform BOTH the Back4App Application ID AND the JavaScript KEY
+Parse.initialize(
+  'sIdnfotzGcpvsSYLgKVYehWTFAtEpVs9uC6N6ciH', // This is your Application ID
+  'HhMUQhtryM2RuNR4drEV0jfU4kBDwaVA4eDjOMZw' // This is your Javascript key
+);
+
+(async () => {
+  const myNewObject = new Parse.Object('Cliente');
+  myNewObject.set('nome', 'A string');
+  myNewObject.set('email', 'A string');
+  myNewObject.set('telefone', 1);
+  try {
+    const result = await myNewObject.save();
+    // Access the Parse Object attributes using the .GET method
+    console.log('Cliente created', result);
+  } catch (error) {
+    console.error('Error while creating Cliente: ', error);
+  }
+})();
+
+</script>
+
 </body>
 </html>
