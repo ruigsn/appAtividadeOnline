@@ -62,10 +62,10 @@ meuFormulario.addEventListener('submit', async (event) => {
     const result = await myNewObject.save();
     // Access the Parse Object attributes using the .GET method
     console.log('Cliente criado com sucesso', result);
-		window.location.href = 'sucesso.html';		
+		window.location.href = '../telas/sucesso.html';		
   } catch (error) {
     console.error('Error while creating Cliente: ', error);
-		window.location.href = 'erro.html';
+		window.location.href = '../telas/erro.html';
   }
 });
 
